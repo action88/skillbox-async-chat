@@ -21,7 +21,7 @@ class ServerProtocol(asyncio.Protocol):
         if self.login is not None:
             self.send_message(decoded)
         else:
-            if decoded.startswith("l"):
+            if decoded.startswith("login:"):
                 self.login = decoded.replace("login: ", "\r\n").replace("\r\n", "")
                 if self.login in self.server.login:
                     self.transport.write(f"Логин {self.login} занят, попробуйте другой\n".encode())
